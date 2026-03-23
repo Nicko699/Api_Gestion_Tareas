@@ -4,6 +4,28 @@ API RESTful para la gestión de tareas personales con autenticación JWT. Permit
 
 ---
 
+Arquitectura
+El proyecto sigue una arquitectura en capas donde cada carpeta tiene una responsabilidad clara:
+src/
+├── Api/
+│   ├── Middleware/       # Middleware de autenticación JWT
+│   └── Route/           # Definición de rutas (TaskRoute, UserRoute)
+├── Config/              # Configuración centralizada (App, Prisma, variables de entorno)
+├── Controller/          # Lógica que atiende las peticiones HTTP
+├── Dto/
+│   ├── TaskDto/         # DTOs de entrada y salida para tareas
+│   └── UserDto/         # DTOs de entrada y salida para usuarios
+├── Exception/           # Manejo centralizado de errores (GlobalException, ErrorMessage)
+├── Model/
+│   ├── Enum/            # Enum Estado (PENDIENTE, EN_PROGRESO, COMPLETADA)
+│   ├── Task.ts          # Modelo de tarea
+│   └── User.ts          # Modelo de usuario
+├── Persistence/         # Comunicación con la base de datos via Prisma
+├── Service/             # Interfaces e implementaciones de la lógica de negocio
+├── Types/               # Extensión de tipos de Express (Request con usuario autenticado)
+├── Validators/          # Esquemas de validación con Zod
+└── index.ts             # Punto de entrada de la aplicación
+
 **Flujo de una petición:**
 ```
 Cliente → Route → Middleware (auth) → Controller → Service → Persistence (Prisma) → PostgreSQL
