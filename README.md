@@ -107,11 +107,9 @@ PORT=3000
 # Conexión a PostgreSQL
 DATABASE_URL="postgresql://usuario:contraseña@localhost:5432/api_gestion_tareas"
 
-# Secreto para firmar los JWT
+# Cadena de caracteres 32 digitos para firmar los JWT
 JWT_SECRET="tu_secreto_seguro_aqui"
 
-# Expiración del token (ej: 1d, 7d, 2h)
-JWT_EXPIRES_IN="1d"
 ```
 ---
 
