@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+   previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+//realcion 1 a N usuario con tarea
+
+// tabla usuario
+model Usuario {
+  id       Int     @id @default(autoincrement())
+  nombre   String
+  email    String  @unique
+  password String
+  tasks    Task[]  // un usuario tiene muchas tareas
+}
+
+// tabla tarea 
+model Task {
+  id               Int      @id @default(autoincrement())
+  titulo           String
+  descripcion      String
+  estado           Estado   @default(PENDIENTE)
+  fechaVencimiento DateTime
+  usuarioId        Int      // llave foránea
+  usuario          Usuario  @relation(fields: [usuarioId], references: [id]) 
+}
+
+enum Estado {
+  PENDIENTE
+  EN_CURSO
+  COMPLETADA
+}
