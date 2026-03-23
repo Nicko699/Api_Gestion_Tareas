@@ -154,7 +154,7 @@ npm start        # Ejecutar la versión compilada
 | titulo | String | Título de la tarea |
 | descripcion | String | Descripción detallada |
 | fechaVencimiento | DateTime | Fecha límite |
-| estado | Estado | PENDIENTE / EN_PROGRESO / COMPLETADA |
+| estado | Estado | PENDIENTE / EN_CURSO / COMPLETADA |
 | userId | Int | FK al usuario dueño |
 | createdAt | DateTime | Fecha de creación |
 | updatedAt | DateTime | Última actualización |
