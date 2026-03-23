@@ -3,9 +3,11 @@
 API RESTful para la gestión de tareas personales con autenticación JWT. Permite a los usuarios registrarse, iniciar sesión y administrar sus propias tareas de forma segura.
 
 ---
-
-Arquitectura
+## Arquitectura
+ 
 El proyecto sigue una arquitectura en capas donde cada carpeta tiene una responsabilidad clara:
+ 
+```
 src/
 ├── Api/
 │   ├── Middleware/       # Middleware de autenticación JWT
@@ -25,6 +27,7 @@ src/
 ├── Types/               # Extensión de tipos de Express (Request con usuario autenticado)
 ├── Validators/          # Esquemas de validación con Zod
 └── index.ts             # Punto de entrada de la aplicación
+```
 
 **Flujo de una petición:**
 ```
