@@ -168,7 +168,6 @@ npm start        # Ejecutar la versión compilada
 | nombre | String | Nombre del usuario |
 | email | String | Email único |
 | password | String | Hash bcrypt |
-| createdAt | DateTime | Fecha de creación |
 
 ### Tarea
 | Campo | Tipo | Descripción |
@@ -179,5 +178,3 @@ npm start        # Ejecutar la versión compilada
 | fechaVencimiento | DateTime | Fecha límite |
 | estado | Estado | PENDIENTE / EN_CURSO / COMPLETADA |
 | userId | Int | FK al usuario dueño |
-| createdAt | DateTime | Fecha de creación |
-| updatedAt | DateTime | Última actualización |
