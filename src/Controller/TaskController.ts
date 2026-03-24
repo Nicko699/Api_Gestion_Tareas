@@ -5,8 +5,8 @@ import { UpdateTaskRequestDto } from "../Dto/TaskDto/UpdateTaskRequestDto.js";
 import { validate } from "../Validators/Validate.js";
 
 /**
- * Controlador de tareas, maneja las solicitudes HTTP relacionadas con las tareas
  * @class TaskController
+ * @description Controlador de tareas, maneja las solicitudes HTTP relacionadas con las tareas
  */
 export class TaskController {
 

@@ -16,12 +16,6 @@ const SECRET = Buffer.from(envConfig.jwtSecret, "utf-8");
  * 
  * Header esperado:
  * Authorization: Bearer <token>
- * 
- * Payload esperado en el token:
- * {
- *   sub: number,
- *   email: string
- * }
  */
 export function authenticate(req: Request, _res: Response, next: NextFunction): void {
 

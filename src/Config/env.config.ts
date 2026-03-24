@@ -3,9 +3,10 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 /**
- * Clase de configuración de entorno, implementa el patrón singleton para cargar las variables de entorno una sola vez y proporcionar acceso global a ellas. Carga las variables de entorno desde un archivo .env y las expone como propiedades de la clase.
+ * Clase de configuración de variables de entorno, implementa el patrón singleton para cargar las variables de entorno una sola vez y proporcionar acceso global a ellas. 
+ * Carga las variables de entorno desde un archivo .env y las expone como propiedades de la clase.
  * @class EnvConfig
- * @property {number} port - Puerto en el que se ejecuta la aplicación (por defecto 3000)
+ * @property {number} port - Puerto en el que se ejecuta la aplicación,puerto 3000
  * @property {string} jwtSecret - Clave secreta para firmar los tokens JWT
  * @property {string} dbUrl - URL de conexión a la base de datos
  * @method getInstance - Método estático para obtener la instancia de la configuración
@@ -20,7 +21,7 @@ class EnvConfig {
 
   private constructor() {
 
-    this.port = Number(process.env.PORT) ?? 3000;
+    this.port = Number(process.env.PORT) || 3000;
     this.jwtSecret = process.env.JWT_SECRET ?? '';
     this.dbUrl = process.env.DATABASE_URL ?? '';
   }

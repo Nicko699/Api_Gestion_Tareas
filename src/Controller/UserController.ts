@@ -6,7 +6,8 @@ import { validate } from "../Validators/Validate.js";
 
 /**
  * @class UserController
- * @description Este controlador se encarga de manejar las solicitudes HTTP relacionadas con los usuarios, como el registro y el inicio de sesión. Utiliza el servicio de usuario para realizar las operaciones necesarias y devuelve las respuestas correspondientes.
+ * @description Este controlador se encarga de manejar las solicitudes HTTP relacionadas con los usuarios.
+ * Utiliza el servicio de usuario para realizar las operaciones necesarias y devuelve las respuestas correspondientes.
  */
 export class UserController {
 
