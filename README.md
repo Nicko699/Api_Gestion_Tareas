@@ -119,8 +119,8 @@ JWT_SECRET="tu_secreto_seguro_aqui"
 
 | Método | Ruta | Descripción | Auth |
 |--------|------|-------------|------|
-| POST | `/api/auth/register` | Registrar nuevo usuario | No |
-| POST | `/api/auth/login` | Iniciar sesión y obtener token JWT | No |
+| POST | `/api/users` | Registrar nuevo usuario | No |
+| POST | `/api/users/login` | Iniciar sesión y obtener token JWT | No |
 
 ### Tareas
 
