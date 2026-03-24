@@ -3,7 +3,7 @@
 ---
 ## 1. Proceso del Desarrollo de la API
 
-El desarrollo comenzó construyendo desde la base hacia arriba, garantizando que cada capa estuviera estable antes de avanzar a la siguiente.
+El desarrollo se comenzó construyendo desde la base hacia arriba, garantizando que cada capa estuviera estable antes de avanzar a la siguiente.
 
 **Configuración inicial del entorno**
 Lo primero fue instalar y configurar Node.js, Express y TypeScript, junto con el archivo `.env` para las variables de entorno, ya que toda la aplicación depende de esa base. Después se creó la estructura de carpetas del proyecto, definiendo desde el inicio la separación en capas.
