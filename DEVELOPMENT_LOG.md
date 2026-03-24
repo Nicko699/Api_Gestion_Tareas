@@ -6,18 +6,23 @@
 El desarrollo se comenzó construyendo desde la base hacia arriba, garantizando que cada capa estuviera estable antes de avanzar a la siguiente.
 
 **Configuración inicial del entorno**
+
 Lo primero fue instalar y configurar Node.js, Express y TypeScript, junto con el archivo `.env` para las variables de entorno, ya que toda la aplicación depende de esa base. Después se creó la estructura de carpetas del proyecto, definiendo desde el inicio la separación en capas.
 
 **Conexión a la base de datos**
+
 Se instaló y configuró Prisma con PostgreSQL. Antes de continuar, se verificó que la conexión funcionara correctamente y que el servidor levantara sin errores. No avanzar con lógica encima de una base inestable fue una decisión consciente para evitar mezclar errores de configuración con errores de lógica.
 
 **Modelo de datos**
+
 Con la conexión estable, se definieron las dos entidades principales (`User` y `Task`), sus relaciones y el enum `Estado` tanto en `src/Model/` como en el `schema.prisma`. Se ejecutaron las migraciones y se verificó directamente en PostgreSQL que las tablas se crearon correctamente.
 
 **Configuración centralizada y middleware de autenticación**
+
 Se creó la configuración centralizada del proyecto y el middleware de validación JWT, que intercepta las rutas protegidas, verifica el token desde el header `Authorization: Bearer <token>` y expone el usuario autenticado en `req.user`.
 
 **Capas de la aplicación**
+
 Con la base lista, se construyó la aplicación de adentro hacia afuera siguiendo este orden:
 
 1. `Exception/` — clases de error personalizadas y middleware global de manejo de errores
