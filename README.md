@@ -53,8 +53,6 @@ Cliente → Route → Middleware (auth) → Controller → Service → Persisten
 
 - Node.js v18 o superior
 - PostgreSQL corriendo localmente
-- npm
-
 ---
 
 ## Instalación local
