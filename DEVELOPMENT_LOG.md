@@ -1,8 +1,45 @@
 # Bitácora de Desarrollo — API Gestión de Tareas
 
 ---
+## 1. Proceso del Desarrollo de la API
 
-## 1. Uso de Asistentes de IA
+El desarrollo comenzó construyendo desde la base hacia arriba, garantizando que cada capa estuviera estable antes de avanzar a la siguiente.
+
+**Configuración inicial del entorno**
+Lo primero fue instalar y configurar Node.js, Express y TypeScript, junto con el archivo `.env` para las variables de entorno, ya que toda la aplicación depende de esa base. Después se creó la estructura de carpetas del proyecto, definiendo desde el inicio la separación en capas.
+
+**Conexión a la base de datos**
+Se instaló y configuró Prisma con PostgreSQL. Antes de continuar, se verificó que la conexión funcionara correctamente y que el servidor levantara sin errores. No avanzar con lógica encima de una base inestable fue una decisión consciente para evitar mezclar errores de configuración con errores de lógica.
+
+**Modelo de datos**
+Con la conexión estable, se definieron las dos entidades principales (`User` y `Task`), sus relaciones y el enum `Estado` tanto en `src/Model/` como en el `schema.prisma`. Se ejecutaron las migraciones y se verificó directamente en PostgreSQL que las tablas se crearon correctamente.
+
+**Configuración centralizada y middleware de autenticación**
+Se creó la configuración centralizada del proyecto y el middleware de validación JWT, que intercepta las rutas protegidas, verifica el token desde el header `Authorization: Bearer <token>` y expone el usuario autenticado en `req.user`.
+
+**Capas de la aplicación**
+Con la base lista, se construyó la aplicación de adentro hacia afuera siguiendo este orden:
+
+1. `Exception/` — clases de error personalizadas y middleware global de manejo de errores
+2. `Config/` — configuración centralizada de la aplicación y conexión a base de datos
+3. `Api/` — definición base de rutas y middlewares
+4. `Persistence/` — métodos de acceso a la base de datos con Prisma
+5. `Dto/` — estructuras de entrada y salida por entidad
+6. `Services/` — lógica de negocio, implementando interfaces definidas previamente
+7. `Types/` — extensiones de tipos de librerías externas
+8. `Controllers/` — atención de peticiones, delegando al servicio correspondiente
+9. `Validators/` — esquemas de validación de entradas
+10. `Routes/` — definición de rutas y conexión con los controllers, encadenando `.catch(next)` para el manejo de errores async
+
+**Validaciones y manejo de errores**
+Las validaciones de entrada se integraron sobre las rutas ya funcionales. El sistema de manejo de errores centralizado (`GlobalException` + `ErrorMessage`) se diseñó e integró en paralelo al desarrollo de los endpoints.
+
+**Documentación**
+Se fue documentando con JSDoc a lo largo del desarrollo. Al final se integró Swagger para documentar todos los endpoints de forma estructurada.
+
+---
+
+## 2. Uso de Asistentes de IA
 
 Usé la IA Claude como herramienta de aprendizaje durante el desarrollo. La prueba técnica definía qué construir y los conceptos detrás como: autenticación con JWT, separación en capas, manejo de errores centralizado, etc. Los entendía porque vengo de Java. El reto fue implementarlos en un stack que no había usado antes: TypeScript con Node.js y Express. Ahí fue donde me apoyé en la IA, para entender cómo se hacen esas cosas en este ecosistema.
 
@@ -56,7 +93,7 @@ Ejecuté `npx prisma migrate dev` y revisé directamente en PostgreSQL que las t
 
 ---
 
-## 2. Decisiones Tomadas Sin Asistencia de IA
+## 3. Decisiones Tomadas Sin Asistencia de IA
 
 ### Decisión 1 — El sistema de manejo de errores: `ErrorMessage` + `GlobalException`
 
@@ -86,7 +123,7 @@ También definí interfaces de servicio (`ITaskService`, `IUserService`) que las
 
 ---
 
-## 3. Retos y Soluciones
+## 4. Retos y Soluciones
 
 ### Reto principal — Venir de Java: la configuración inicial me consumió demasiado tiempo
 
