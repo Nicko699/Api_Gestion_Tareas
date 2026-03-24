@@ -146,17 +146,6 @@ Con el servidor corriendo, accede a la documentación interactiva en:
 ```
 http://localhost:3000/api/docs
 ```
-
----
-
-## Scripts
-
-```bash
-npm run dev      # Servidor en modo desarrollo con hot-reload
-npm run build    # Compilar TypeScript a JavaScript
-npm start        # Ejecutar la versión compilada
-```
-
 ---
 
 ## Modelo de datos
