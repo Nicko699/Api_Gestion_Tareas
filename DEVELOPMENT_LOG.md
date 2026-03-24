@@ -4,7 +4,7 @@
 
 ## 1. Uso de Asistentes de IA
 
-Usé IA como herramienta de aprendizaje durante el desarrollo. La prueba técnica definía qué construir, y los conceptos detrás — autenticación con JWT, separación en capas, manejo de errores centralizado — los entendía porque vengo de Java. El reto fue implementarlos en un stack que no había usado antes: TypeScript con Node.js y Express. Ahí fue donde me apoyé en la IA, para entender cómo se hacen esas cosas en este ecosistema.
+Usé la IA Claude como herramienta de aprendizaje durante el desarrollo. La prueba técnica definía qué construir y los conceptos detrás como: autenticación con JWT, separación en capas, manejo de errores centralizado, etc. Los entendía porque vengo de Java. El reto fue implementarlos en un stack que no había usado antes: TypeScript con Node.js y Express. Ahí fue donde me apoyé en la IA, para entender cómo se hacen esas cosas en este ecosistema.
 
 ---
 
@@ -17,7 +17,7 @@ Usé IA como herramienta de aprendizaje durante el desarrollo. La prueba técnic
 Me explicó bien el `tsconfig.json` y opciones clave como `strict`, `outDir`, `rootDir` y `esModuleInterop`. También `ts-node-dev` para hot-reload en desarrollo, equivalente al DevTools de Spring Boot. Lo adopté porque son estándares del ecosistema.
 
 **Qué se rechazó o modificó:**
-La IA propuso una estructura plana con pocos archivos. No la usé — la prueba exige separación en capas y además es la forma correcta de organizar el proyecto. Terminé con `Api/`, `Controller/`, `Service/`, `Persistence/`, `Config/`, `Dto/`, `Model/`, `Exception/`, `Types/` y `Validators/`, cada una con una responsabilidad clara.
+La IA propuso una estructura plana con pocos archivos. No la usé por que la prueba exige separación en capas y además es la forma correcta de organizar el proyecto. Terminé con `Api/`, `Controller/`, `Service/`, `Persistence/`, `Config/`, `Dto/`, `Model/`, `Exception/`, `Types/` y `Validators/`, cada una con una responsabilidad clara.
 
 **Verificación realizada:**
 Antes de escribir cualquier lógica de negocio verifiqué que el proyecto compilara sin errores, que la conexión a PostgreSQL funcionara y que el servidor levantara con `npm run dev`.
@@ -33,7 +33,7 @@ Antes de escribir cualquier lógica de negocio verifiqué que el proyecto compil
 La técnica de *declaration merging* con un archivo en `Types/` para extender la interfaz `Request` de Express fue la solución correcta y la usé. Es el patrón estándar de TypeScript para añadir propiedades a tipos de librerías externas.
 
 **Qué se rechazó o modificó:**
-La IA tipó el usuario como `any`. Lo rechacé de inmediato — usar `any` es decirle a TypeScript que se desentienda de ese valor, lo cual anula el propósito del tipado estático. Definí una interfaz explícita con los campos reales que uso (`id` y `email`).
+La IA tipó el usuario como `any`. Lo rechacé de inmediato por que usar `any` es decirle a TypeScript que se desentienda de ese valor, lo cual anula el propósito del tipado estático. Definí una interfaz explícita con los campos reales que uso (`id` y `email`).
 
 **Verificación realizada:**
 Confirmé que el compilador no lanzaba errores al acceder a `req.user.id` en los controllers protegidos.
@@ -62,7 +62,7 @@ Ejecuté `npx prisma migrate dev` y revisé directamente en PostgreSQL que las t
 
 Esta fue una decisión completamente mía, inspirada en cómo se maneja en Java pero adaptada a TypeScript y Express.
 
-Diseñé dos clases en `src/Exception/`: `ErrorMessage`, que estructura la información del error (timestamp con Luxon, status HTTP, tipo y mensaje), y `GlobalException`, que extiende `Error` y expone métodos estáticos para crear los errores más comunes de forma expresiva:
+Diseñé dos clases en `src/Exception/`: `ErrorMessage`, que estructura la información del error (timestamp con Luxon, status HTTP, tipo y mensaje), y `GlobalException`, que extiende `Error` y expone métodos estáticos para crear los errores más comunes de forma clara:
 
 ```typescript
 static notFoundException(message = 'Recurso no encontrado'): GlobalException {
@@ -80,9 +80,9 @@ El método `handleException` funciona como middleware global de Express: si el e
 
 ### Decisión 2 — Interfaces de servicio, modelos, el enum `Estado` y los DTOs
 
-Definí todo el modelo de datos sin asistencia: las entidades en `src/Model/` (`User.ts`, `Task.ts`), el enum `Estado.ts` en `src/Model/Enum/` con los valores `PENDIENTE`, `EN_PROGRESO` y `COMPLETADA`, y todos los DTOs en `src/Dto/` separados por entidad (`TaskDto/`, `UserDto/`) con sus variantes de request y response.
+Definí todo el modelo de datos sin asistencia: las entidades en `src/Model/` (`User.ts`, `Task.ts`), el enum `Estado.ts` en `src/Model/Enum/` con los valores `PENDIENTE`, `EN_CURSO` y `COMPLETADA`, y todos los DTOs en `src/Dto/` separados por entidad (`TaskDto/`, `UserDto/`) con sus variantes de request y response.
 
-También definí interfaces de servicio (`ITaskService`, `IUserService`) que las implementaciones concretas (`TaskServiceImpl`, `UserServiceImpl`) deben cumplir. Es un patrón que conozco de Java — programar contra interfaces en lugar de implementaciones concretas hace el código más desacoplado y fácil de modificar. En los controllers instancio directamente la implementación, pero la dependencia declarada es la interfaz, Usando el paradigma de programación POO.
+También definí interfaces de servicio (`ITaskService`, `IUserService`) que las implementaciones concretas (`TaskServiceImpl`, `UserServiceImpl`) deben cumplir. Es un patrón que conozco de Java, también programar contra interfaces en lugar de implementaciones concretas hace el código más desacoplado y fácil de modificar. En los controllers instancio directamente la implementación, pero la dependencia declarada es la interfaz, Usando el paradigma de programación POO.
 
 ---
 
@@ -90,7 +90,7 @@ También definí interfaces de servicio (`ITaskService`, `IUserService`) que las
 
 ### Reto principal — Venir de Java: la configuración inicial me consumió demasiado tiempo
 
-El mayor obstáculo no fue entender la lógica de la API, sino el cambio de ecosistema. En Java con Spring Boot uno arranca rápido: Spring Initializr genera la estructura, las anotaciones hacen gran parte del trabajo y hay convención sobre configuración en casi todo. En Node.js con TypeScript todo es manual desde el principio.
+El mayor obstáculo no fue entender la lógica de la API, sino el cambio de ecosistema. En Java con Spring Boot uno arranca rápido: Spring Initializer genera la estructura, las anotaciones hacen gran parte del trabajo y hay convención sobre configuración en casi todo. En Node.js con TypeScript todo es manual desde el principio.
 
 Me trabé bastante tiempo configurando `tsconfig.json` correctamente, entendiendo la diferencia entre `CommonJS` y `ESModules`, haciendo que `ts-node-dev` reconociera los paths del proyecto, y entendiendo cómo Express maneja el ciclo de vida de una petición sin el contexto automático que da Spring. Esto me dejó con menos tiempo del que quería para el desarrollo de los endpoints.
 
